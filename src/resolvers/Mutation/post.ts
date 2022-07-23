@@ -1,5 +1,5 @@
 import { Post, Prisma } from '@prisma/client';
-import { Context } from '../index';
+import { Context } from '../../index';
 
 interface PostArgs {
     post: {
@@ -15,7 +15,7 @@ interface PostPayloadType {
     post: Post | Prisma.Prisma__PostClient<Post> | null;
 }
 
-export const Mutation = {
+export const postResolvers = {
     postCreate: async (_: any, { post }: PostArgs, { prisma }: Context): Promise<PostPayloadType> => {
         const { title, content } = post;
         if (!title || !content) {
@@ -66,8 +66,8 @@ export const Mutation = {
             title, content
         }
 
-        if(!title) delete payloadToUpdate.title;
-        if(!content) delete payloadToUpdate.content;
+        if (!title) delete payloadToUpdate.title;
+        if (!content) delete payloadToUpdate.content;
 
         return {
             userErrors: [],
@@ -82,12 +82,12 @@ export const Mutation = {
         }
     },
     postDelete: async (_: any, { postId }: { postId: String }, { prisma }: Context): Promise<PostPayloadType> => {
-        const existingPost = await prisma.post.findUnique({
+        const post = await prisma.post.findUnique({
             where: {
                 id: Number(postId)
             }
         });
-        if (!existingPost) {
+        if (!post) {
             return {
                 userErrors: [{
                     message: 'Post not found'
@@ -95,13 +95,14 @@ export const Mutation = {
                 post: null
             }
         }
+        await prisma.post.delete({
+            where: {
+                id: Number(postId)
+            }
+        })
         return {
             userErrors: [],
-            post: prisma.post.delete({
-                where: {
-                    id: Number(postId)
-                }
-            })
+            post
         }
     }
 }
