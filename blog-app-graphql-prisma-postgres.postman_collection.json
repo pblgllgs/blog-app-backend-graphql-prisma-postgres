@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "37be42d4-3c43-4476-9558-5a92f5c1abf6",
+		"name": "blog-app-graphql-prisma-postgres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17450698"
+	},
+	"item": [
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "postCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDVAdGVzdC5jb20iLCJpYXQiOjE2NTg2OTcwMTUsImV4cCI6MTY2MjI5NzAxNX0.K7DL83l2e-V84JflcmFy63-n3_ymvcs3BDWvyK9b0PE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($post: PostInput!){\r\n  postCreate(post: $post) {\r\n    userErrors {\r\n      message\r\n    }\r\n    post {\r\n      title\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n    \"post\":{\r\n        \"title\": \"test 8\",\r\n        \"content\":\"created by user 5\"\r\n    }  \r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "posts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\r\n    posts{\r\n        id\r\n        title\r\n        content\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postUpdate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE2NTg2MzE5NzQsImV4cCI6MTY2MjIzMTk3NH0.Qd8GKiqIfoYSc0rlpkcHfDlEE6MFYqMAvFTDjCLHc-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($post:PostInput!,$postId: ID!){\r\n    postUpdate(post:$post, postId:$postId){\r\n        userErrors{\r\n            message\r\n        }\r\n        post{\r\n            title\r\n            content\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"post\":{\r\n        \"title\":\"post 6\",\r\n        \"content\":\"post 6 by userId 6\"\r\n    },\r\n    \"postId\": 6\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postDelete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJpYXQiOjE2NTg2MzI1MTEsImV4cCI6MTY2MjIzMjUxMX0.Armc1xCNOup7XbDCo8qt8n9bX4-m-P4A8IB9TLfoAVY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($postId: ID!){\r\n    postDelete(postId:$postId){\r\n        userErrors{\r\n            message\r\n        }\r\n        post{\r\n            title\r\n            content\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"postId\": 8\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePublishedState",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoidGVzdDZAdGVzdC5jb20iLCJpYXQiOjE2NTg2OTkzODksImV4cCI6MTY2MjI5OTM4OX0.RClKLqdO0y2JvRXFlokUgxKqJ7XfXgeg-s_XY18Nn9c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($postId: ID!){\r\n    changePublishState(postId:$postId){\r\n        userErrors{\r\n            message\r\n        }\r\n        post{\r\n            published\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"postId\":8\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postPublish",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE2NTg2MzM0MTQsImV4cCI6MTY2MjIzMzQxNH0.vDooRc4uEWfXIpoGHLwc5t91gvSiCxVm00RODD0rA_4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($postId: ID!){\r\n    postPublish(postId:$postId){\r\n        userErrors{\r\n            message\r\n        }\r\n        post{\r\n            published\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"postId\":5\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postUnpublish",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE2NTg2MzM0MTQsImV4cCI6MTY2MjIzMzQxNH0.vDooRc4uEWfXIpoGHLwc5t91gvSiCxVm00RODD0rA_4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($postId: ID!){\r\n    postUnpublish(postId:$postId){\r\n        userErrors{\r\n            message\r\n        }\r\n        post{\r\n            published\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"postId\":5\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($credentials:CredentialsInput! $name: String!, $bio:String!){\r\n  signup(credentials:$credentials, name: $name,bio:$bio) {\r\n    userErrors {\r\n      message\r\n    }\r\n    token\r\n  }\r\n}",
+								"variables": "{\r\n  \"credentials\":{\r\n      \"email\":\"test2@test.com\",\r\n      \"password\":\"123456\"\r\n  },\r\n  \"name\": \"test 1\",\r\n  \"bio\": \"test 1\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($credentials:CredentialsInput!){\r\n  signin(credentials:$credentials) {\r\n    userErrors {\r\n      message\r\n    }\r\n    token\r\n  }\r\n}",
+								"variables": "{\r\n  \"credentials\":{\r\n      \"email\":\"test5@test.com\",\r\n      \"password\":\"123456\"\r\n  }\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDVAdGVzdC5jb20iLCJpYXQiOjE2NTg2OTcwMTUsImV4cCI6MTY2MjI5NzAxNX0.K7DL83l2e-V84JflcmFy63-n3_ymvcs3BDWvyK9b0PE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\r\n    me{\r\n        id\r\n        name\r\n        posts{\r\n            title\r\n        }\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDFAdGVzdC5jb20iLCJpYXQiOjE2NTg2OTQ0MDEsImV4cCI6MTY2MjI5NDQwMX0.up1gdNe7VbDGJ_QHaD26aznHbHbIDSatzz9BS9QsQYE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query($userId: ID!){\r\n    profile(userId: $userId){\r\n        bio\r\n        user{\r\n            name\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"userId\":5\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
