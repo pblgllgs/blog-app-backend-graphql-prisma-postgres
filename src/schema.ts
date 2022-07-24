@@ -7,9 +7,13 @@ export const typeDefs = gql`
 
     type Mutation {
         postCreate( post: PostInput!): PostPayload!
-        postUpdate( postId: ID!, post: PostInput!): PostPayload
-        postDelete( postId: ID!): PostPayload
-        signup(email: String!, name: String!, password: String!, bio:String!): AuthPayload!
+        postUpdate( postId: ID!, post: PostInput!): PostPayload!
+        postDelete( postId: ID!): PostPayload!
+        postPublish(postId: ID!): PostPayload!
+        postUnpublish(postId: ID!): PostPayload!
+        changePublishState(postId: ID!): PostPayload!
+        signup(credentials: CredentialsInput!, name: String!, bio:String!): AuthPayload!
+        signin(credentials: CredentialsInput!): AuthPayload!
     }
 
     type User {
@@ -25,15 +29,6 @@ export const typeDefs = gql`
         user: User!
     }
 
-    type PostPayload {
-        userErrors:[UserError!]!
-        post: Post
-    }
-
-    type UserError{
-        message: String!
-    }
-
     type Post {
         id: ID!
         title: String!
@@ -43,13 +38,27 @@ export const typeDefs = gql`
         user: User!
     }
 
+    type PostPayload {
+        userErrors:[UserError!]!
+        post: Post
+    }
+
+    type UserError{
+        message: String!
+    }
+
     type AuthPayload {
         userErrors:[UserError!]!
-        user: User
+        token: String
     }
 
     input PostInput {
         title: String
         content: String
+    }
+
+    input CredentialsInput {
+        email: String!
+        password: String!
     }
 `;
