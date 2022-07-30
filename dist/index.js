@@ -72,5 +72,5 @@ var server = new apollo_server_1.ApolloServer({
 });
 server.listen().then(function (_a) {
     var url = _a.url;
-    console.log("Server ready at ".concat(url));
+    console.log("Server ready at ".concat(url, " ").concat(process.env.PORT));
 });
