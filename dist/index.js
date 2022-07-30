@@ -42,6 +42,7 @@ var schema_1 = require("./schema");
 var resolvers_1 = require("./resolvers");
 var client_1 = require("@prisma/client");
 var getUserFromToken_1 = require("./resolvers/utils/getUserFromToken");
+var config_1 = require("./config/config");
 exports.prisma = new client_1.PrismaClient();
 var server = new apollo_server_1.ApolloServer({
     typeDefs: schema_1.typeDefs,
@@ -70,7 +71,6 @@ var server = new apollo_server_1.ApolloServer({
         });
     }
 });
-server.listen().then(function (_a) {
-    var url = _a.url;
-    console.log("Server ready at ".concat(url, " ").concat(process.env.PORT));
+server.listen(config_1.config.server.port, function () {
+    console.log("Server is running on port ".concat(config_1.config.server.port));
 });

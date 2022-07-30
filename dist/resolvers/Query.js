@@ -91,5 +91,25 @@ exports.Query = {
                 userId: Number(userId)
             }
         });
+    },
+    users: function (_, __, _a) {
+        var prisma = _a.prisma;
+        return __awaiter(void 0, void 0, void 0, function () {
+            var users;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4, prisma.user.findMany({
+                            orderBy: [
+                                {
+                                    createdAt: "desc"
+                                }
+                            ]
+                        })];
+                    case 1:
+                        users = _b.sent();
+                        return [2, users];
+                }
+            });
+        });
     }
 };

@@ -31,5 +31,15 @@ export const Query = {
                 userId: Number(userId)
             }
         });
+    },
+    users: async (_: any, __: any, { prisma }: Context) => {
+        const users = await prisma.user.findMany({
+            orderBy: [
+                {
+                    createdAt: "desc"
+                }
+            ]
+        });
+        return users;
     }
 }
