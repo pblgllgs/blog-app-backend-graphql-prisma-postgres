@@ -28,7 +28,7 @@ export const typeDefs = gql`
     type Profile {
         id: ID!
         bio: String!
-        isMyProdile: Boolean!
+        isMyProfile: Boolean!
         user: User!
     }
 
