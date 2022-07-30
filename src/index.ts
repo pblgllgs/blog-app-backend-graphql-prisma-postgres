@@ -3,12 +3,13 @@ import { typeDefs } from './schema';
 import { Query, Mutation, Profile, User, Post } from './resolvers';
 import { Prisma, PrismaClient } from "@prisma/client";
 import { getUserFromToken } from './resolvers/utils/getUserFromToken';
+import { config } from "./config/config";
 
 export const prisma = new PrismaClient();
 
 export interface Context {
     prisma: PrismaClient<Prisma.PrismaClientOptions, never, Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined>;
-    userInfo:{
+    userInfo: {
         userId: number;
     } | null;
 }
@@ -22,7 +23,7 @@ const server = new ApolloServer({
         User,
         Post
     },
-    context: async ({ req }: any):Promise<Context> => {
+    context: async ({ req }: any): Promise<Context> => {
         const userInfo = await getUserFromToken(req.headers.authorization);
         return {
             prisma,
@@ -31,6 +32,6 @@ const server = new ApolloServer({
     }
 });
 
-server.listen().then(({ url }) => {
-    console.log(`Server ready at ${url} ${process.env.PORT}`);
+server.listen(config.server.port, () => {
+    console.log(`Server is running on port ${config.server.port}`);
 })
